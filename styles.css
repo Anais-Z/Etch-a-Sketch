@@ -1,6 +1,8 @@
 .grid-tile{
     border: 1px solid black;
-    height: 20px;
+    height: 30px;
+    width : 30px;
+    
 }
 
 .main-div{
@@ -8,5 +10,6 @@
     display: grid;
     grid-template-columns: repeat(16, 1fr);
     grid-template-rows: repeat(16, 1fr);
-    
+    width: max-content;
+    height: max-content;
 }
