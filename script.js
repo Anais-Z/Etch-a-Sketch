@@ -12,8 +12,9 @@ for(let i = 0; i < 256; i++){
 
 function startColor(){
     if(click === true){
-         this.style.backgroundColor = "red";
+         this.style.backgroundColor = color.value;
     }
+    
 }
 
 const divTiles = document.querySelectorAll('.grid-tile')
@@ -27,8 +28,11 @@ divTiles.forEach((div) =>{
 //click event to toggle click var to true and false
 mainDiv.addEventListener('click', ()=>{
     click = !click;
+    console.log(color.value)
 })
 
+//accessing color picker
+const color = document.querySelector('#colorpicker')
 
 
 
