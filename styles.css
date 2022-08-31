@@ -13,3 +13,7 @@
     width: max-content;
     height: max-content;
 }
+
+h1, h3{
+    text-align: center;
+}
