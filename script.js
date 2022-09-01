@@ -1,12 +1,22 @@
-const mainDiv = document.querySelector('.main-div')
-let click = false
 
+let click = false
 //creating the tiles
 
-for(let i = 0; i < 256; i++){
-    const div = document.createElement('div');
-    div.classList.add('grid-tile');
-    mainDiv.appendChild(div);
+function createGrid(gridValue){   
+    let mainDiv = document.querySelector('.main-div')
+    for(let i = 0; i < gridValue * gridValue; i++){
+        const div = document.createElement('div');
+        div.addEventListener('mouseover', startColor);
+           div.classList.add('grid-tile');
+
+           mainDiv.appendChild(div);
+   }
+
+    mainDiv.style.gridTemplateRows = `repeat(${gridValue}, 1fr)`;
+    mainDiv.style.gridTemplateColumns = `repeat(${gridValue}, 1fr)`;
+    mainDiv.style.height = '550px'
+    mainDiv.style.width = '550px'
+   gridValue = 0
 }
 
 
@@ -15,38 +25,39 @@ function startColor(){
     if(click === true){
          this.style.backgroundColor = color.value;
     }
-    
 }
 
-const divTiles = document.querySelectorAll('.grid-tile')
-console.log(divTiles)
-
-//event to color the tiles
-divTiles.forEach((div) =>{
-    div.addEventListener('mouseover', startColor);
-})
 
 //click event to toggle click var to true and false
-mainDiv.addEventListener('click', ()=>{
+const body = document.body
+body.addEventListener('click', ()=>{
     click = !click;
-    console.log(color.value)
 })
+   
+
 
 //resets the grid into background color white
 function resetGrid(){
-    divTiles.forEach((div) =>{
-        div.style.backgroundColor = 'white';
+    let mainDiv = document.querySelector('.main-div')
+    let gridTiles = mainDiv.querySelectorAll('.grid-tile')
+    gridTiles.forEach(div => {
+        div.style.backgroundColor = 'white'
     })
-    
 }
+
 
 
 //changes the value to what the slider points to
 function changeGridValue(){
     gridValue = gridSlider.value
     gridVal.textContent = gridSlider.value
-    console.log(gridValue)
-    createTiles(gridValue)
+    let mainDiv = document.querySelector('.main-div')
+    while(mainDiv.firstChild){
+        mainDiv.firstChild.remove()
+    }
+
+    createGrid(gridValue)
+   
 }
 
 //accessing color picker
@@ -68,4 +79,5 @@ gridVal.style.color = 'black'
 gridSlider.addEventListener('change', changeGridValue)
 
 //create tiles
-createTiles(16)
+createGrid(16)
+
